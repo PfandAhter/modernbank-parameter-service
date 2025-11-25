@@ -12,15 +12,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler  extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorCodeResponse> handleNotFoundException(NotFoundException exception) {
+        log.error("NotFoundException occurred: {}", exception.getMessage(), exception);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(createErrorResponseBody(exception.getErrorCode()));
     }
 
-    private ErrorCodeResponse createErrorResponseBody(String errorCode){
+    private ErrorCodeResponse createErrorResponseBody(String errorCode) {
         return new ErrorCodeResponse(ErrorCodesDTO.builder()
                 .id(errorCode)
                 .error("Not Found")
