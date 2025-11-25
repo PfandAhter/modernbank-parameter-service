@@ -1,0 +1,38 @@
+server:
+  port: 8086
+
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  data:
+    redis:
+      port: 6379             # Redis varsay?lan portu
+      password:              # Parolan yoksa bo? b?rak
+      timeout: 6000          # Ba?lant? zaman a??m? (ms)
+      host: ${REDIS_HOST}
+  jpa:
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    repositories:
+      enabled: true
+  application:
+    name: parameter-server
+  main:
+    banner-mode: off
+
+cache:
+  type: redis
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env
