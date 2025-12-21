@@ -89,4 +89,6 @@ public class ErrorCodeConstant {
     public static final String OTP_NOT_FOUND_OR_INVALID = "H0043";
 
     public static final String USER_ALREADY_EXISTS = "H0044";
+
+    public static final String ACCESS_DENIED_OR_NOT_FOUND = "H0045";
 }
