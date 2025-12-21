@@ -26,4 +26,7 @@ public class ErrorCode implements Serializable {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "http_status")
+    private Integer httpStatus;
 }

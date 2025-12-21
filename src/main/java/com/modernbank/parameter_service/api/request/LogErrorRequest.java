@@ -1,15 +1,28 @@
 package com.modernbank.parameter_service.api.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class LogErrorRequest extends BaseRequest {
+    private String traceId;
 
-public class LogErrorRequest extends BaseRequest{
+    private String requestPath;
+
+    private String exceptionName;
+
     private String serviceName;
+
     private String errorCode;
+
     private String errorMessage;
-    private String timestamp;
+
     private String stackTrace;
+
+    private LocalDateTime timestamp;
 }
