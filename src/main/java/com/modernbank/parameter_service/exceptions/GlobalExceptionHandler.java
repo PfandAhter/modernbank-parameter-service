@@ -43,10 +43,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<BaseResponse> handleNotFoundException(NotFoundException exception) {
-        log.error("NotFoundException occurred: {}", exception.getMessage(), exception);
+        log.error("@@@@@@@@@@@ CRITICAL: NotFoundException occurred: {}", exception.getMessage(), exception);
+        ErrorCode errorCode = getErrorCodeSafe();
+
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(new BaseResponse("FAILED", "ERR-NOT-FOUND", "İstenen hata kodu veya kayıt bulunamadı."));
+                .status(errorCode.getHttpStatus())
+                .body(new BaseResponse("FAILED", errorCode.getError(), errorCode.getDescription()));
     }
 
     private BaseResponse createErrorResponseBody(Exception exception, HttpServletRequest request, ErrorCode errorCodes) {
@@ -71,5 +73,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         } catch (Exception e) {
             log.error("Error log process failed " + e.getMessage());
         }
+    }
+
+    private ErrorCode getErrorCodeSafe() {
+        return ErrorCode.builder()
+                .id("SYSTEM_ERROR")
+                .error("Sistem Hatası")
+                .description("İşleminiz sırasında beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.")
+                .httpStatus(500)
+                .build();
     }
 }

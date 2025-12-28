@@ -35,7 +35,8 @@ public class ServiceErrorLog {
 
     private String exceptionName;
 
-    @Column(name = "stack_trace", columnDefinition = "TEXT")
+    @Lob
+    @Column(name = "stack_trace", columnDefinition = "LONGTEXT")
     private String stackTrace;
 
     @Column(name = "request_path")

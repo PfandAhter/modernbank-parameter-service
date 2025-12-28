@@ -12,7 +12,7 @@ spring:
     password: ${DATABASE_PASSWORD}
   data:
     redis:
-      port: ${REDIS_PORT:6379}
+      port: ${REDIS_PORT}
       password:
       timeout: 6000
       host: ${REDIS_HOST}
