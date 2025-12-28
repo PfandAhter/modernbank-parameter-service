@@ -6,4 +6,6 @@ public interface HeaderService {
     String extractUserId();
 
     String extractUserRole();
+
+    String extractCorrelationId();
 }

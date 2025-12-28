@@ -20,7 +20,7 @@ public class ServiceLogServiceImpl implements ServiceLogService {
 
     @Override
     public void logError(LogErrorRequest request) {
-        log.info("Logging error: Service: {}, ErrorCode: {}, Message: {}", request.getServiceName(),
+        log.info("Logging error traceId {} : Service: {}, ErrorCode: {}, Message: {}",request.getTraceId(), request.getServiceName(),
                 request.getErrorCode(), request.getErrorMessage());
         serviceErrorLogRepository.save(mapperService.map(request, ServiceErrorLog.class));
     }

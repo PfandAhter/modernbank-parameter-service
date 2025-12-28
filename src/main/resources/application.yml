@@ -1,6 +1,10 @@
 server:
   port: 8086
 
+logging:
+  pattern:
+    console: '%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(%-5level) %clr([%X{traceId}]){yellow} %clr(%logger{36}){cyan} - %msg%n'
+
 spring:
   datasource:
     url: ${DATABASE_URL}
@@ -8,9 +12,9 @@ spring:
     password: ${DATABASE_PASSWORD}
   data:
     redis:
-      port: 6379             # Redis varsay?lan portu
-      password:              # Parolan yoksa bo? b?rak
-      timeout: 6000          # Ba?lant? zaman a??m? (ms)
+      port: ${REDIS_PORT}
+      password:
+      timeout: 6000
       host: ${REDIS_HOST}
   jpa:
     properties:
