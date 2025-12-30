@@ -9,4 +9,5 @@ public class ErrorCodeModel {
     private String id;
     private String error;
     private String description;
+    private Integer httpStatus;
 }

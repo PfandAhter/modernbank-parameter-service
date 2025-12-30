@@ -22,6 +22,9 @@ public class ServiceLogServiceImpl implements ServiceLogService {
     public void logError(LogErrorRequest request) {
         log.info("Logging error traceId {} : Service: {}, ErrorCode: {}, Message: {}",request.getTraceId(), request.getServiceName(),
                 request.getErrorCode(), request.getErrorMessage());
-        serviceErrorLogRepository.save(mapperService.map(request, ServiceErrorLog.class));
+        ServiceErrorLog serviceErrorLog = mapperService.map(request, ServiceErrorLog.class);
+        serviceErrorLog.setCreatedAt(request.getTimestamp());
+
+        serviceErrorLogRepository.save(serviceErrorLog);
     }
 }
